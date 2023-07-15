@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import BarraSuperior from './Componentes/BarraSuperior';
 import ContenedorTareas from './Componentes/ContenedorTareas';
@@ -13,14 +12,24 @@ function App() {
     let categoriasTareasTest = [];
 
     categoriasTareasTest['Categoria01'] = [{
+      id: 1,
       categoria: 'Categoria01',
-      tarea: 'tarea01',
+      nombre: 'tarea01',
+      descripcion: 'descripicón Tarea 01',
       prioridad: 1
+    },{
+      id: 3,
+      categoria: 'Categoria01',
+      nombre: 'tarea03',
+      descripcion: 'descripicón Tarea 03',
+      prioridad: 0
     }];
-    
+
     categoriasTareasTest['Categoria02'] = [{
+      id: 2,
       categoria: 'Categoria02',
-      tarea: 'tarea02',
+      nombre: 'tarea02',
+      descripcion: 'descripicón Tarea 02',
       prioridad: 2
     }];   // lista de tareas
     

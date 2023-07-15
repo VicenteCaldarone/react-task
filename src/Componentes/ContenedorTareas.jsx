@@ -9,25 +9,13 @@ function ContenedorTareas() {
     console.log('ContenedorTareas ' + Object.keys(categoriasTareasContext).length);
     console.log(categoriasTareasContext);
 
-/*     if( Object.entries(categoriasTareasContext).length > 0){
-
-        Object.entries(categoriasTareasContext).map(([categoria, tareas])=>{
-            console.log(categoria);
-            console.log(tareas);
-        })
-     } */
-
-
   return (
     <div className="px-3">
         <div className="row" id="cardContainer">
 
         {Object.entries(categoriasTareasContext).length > 0 ? 
             Object.entries(categoriasTareasContext).map(([categoria, tareas])=>{
-                return(
-                <Categoria key={categoria} nombre={categoria}>
-
-                </Categoria>)
+                return<Categoria key={categoria} nombre={categoria} listaTareas={tareas}></Categoria>
             }):
             (<></>)
         }
