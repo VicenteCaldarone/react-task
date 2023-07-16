@@ -1,29 +1,51 @@
-import React, {useState}  from 'react'
+import React, {useContext, useState}  from 'react'
+import { CategoriasTareasContext } from "../App";   // Context
+
+/**
+ * funcion generadora de identificadores: 
+ * @returns valor unico de tipo string
+ */
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+}
 
 function BarraSuperior() {
-    
+    const { categoriasTareas, setCategoriasTareas } = useContext(CategoriasTareasContext);
     // hooks
     const [categoria, setCategoria] = useState("");
     const [tarea, setTarea] = useState("");
     const [prioridad, setPrioridad] = useState("-1");
 
-    const [categorias, setCategorias] = useState([]);
-
     const addTarea = (e) =>{
         e.preventDefault();
 
         if(validarInputs()){
-            
-            if(!categorias[categoria]){
-                categorias[categoria] = [];
+            //-- creo una copia del array de categoriasTareas
+            let categoriasTareasClone = [];
+            for(const [k, v] of Object.entries(categoriasTareas)){
+                categoriasTareasClone[k] = v;
             }
-            categorias[categoria].push({
+            //-- trabajo sobre la copia
+            if(!categoriasTareasClone[categoria]){
+                categoriasTareasClone[categoria] = [];
+            }
+            categoriasTareasClone[categoria].push({
+                id: generateUUID(),
                 categoria: categoria,
-                tarea: tarea,
-                prioridad: prioridad
+                nombre: tarea,
+                prioridad: prioridad,
+                descripcion: ''
             });
-
-            console.log(categorias);
+            //-- actualizo el array con la copia
+            setCategoriasTareas(categoriasTareasClone);
+            //-- limpio imputs
+            limpiarInputs();
         }else{
         }
     }
@@ -46,7 +68,11 @@ function BarraSuperior() {
         return true;
     }
 
-
+    const limpiarInputs = () => {
+        setCategoria("");
+        setTarea("");
+        setPrioridad("-1");
+    }
 
   return (
     <div className="bg-light bg-opacity-50 p-1 m-1 shadow-lg rounded">

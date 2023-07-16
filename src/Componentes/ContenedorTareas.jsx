@@ -2,15 +2,16 @@ import React, {useContext, useEffect, useState} from 'react'
 import Categoria from './Categoria'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
 import { CategoriasTareasContext } from "../App";
 
 const RSwal = withReactContent(Swal);
 
 function ContenedorTareas() {
-
-    // const categoriasTareasContext = useContext(CategoriasTareasContext);
-    const [categoriasTareas, setCategoriasTareas] = useState([]);
+    const { categoriasTareas, setCategoriasTareas } = useContext(CategoriasTareasContext);
+/* 
+    const [categoriasTareas, setCategoriasTareas] = useState(
+        useContext(CategoriasTareasContext)
+    ); */
 
     useEffect(() => {
       let categoriasTareasTest = [];
@@ -50,16 +51,15 @@ function ContenedorTareas() {
             confirmButtonText: 'Eliminar',
             cancelButtonText: 'Cancelar'
           }).then((result) => {
-            // delete categoriasTareasContext[categoriaNombre];
-            
+            //-- 
             let categoriasTareasAux = [];
             for(const key in categoriasTareas){
-                if(key != categoriaNombre){
+                if(key !== categoriaNombre){
                     categoriasTareasAux[key] = categoriasTareas[key];
                 }
             }
             setCategoriasTareas(categoriasTareasAux);
-            
+            //--
             if (result.isConfirmed) {
               RSwal.fire(
                 'Eliminado!',
