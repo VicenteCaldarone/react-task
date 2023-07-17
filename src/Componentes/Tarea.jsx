@@ -70,8 +70,8 @@ function Tarea(props) {
                 </div>  
             </div>
             <div className="d-flex justify-content-end">
-                <button className="btn btn-outline-primary btn-sm m-2" type="button" onClick={reactivarTarea} disabled={!finalizada} data-toggle="tooltip" title="Reactivar tarea"><i class="fa-solid fa-arrow-rotate-left"></i></button>
                 <button className="btn btn-outline-success btn-sm m-2" type="button" onClick={finalizarTarea} disabled={finalizada} data-toggle="tooltip" title="Finalizar tarea"><i className="fa-solid fa-check"></i></button>
+                <button className="btn btn-outline-primary btn-sm m-2" type="button" onClick={reactivarTarea} disabled={!finalizada} data-toggle="tooltip" title="Reactivar tarea"><i class="fa-solid fa-arrow-rotate-left"></i></button>
                 <button className="btn btn-outline-danger btn-sm m-2" type="button" onClick={eliminarTarea} data-toggle="tooltip" title="Eliminar tarea"><i className="fa-solid fa-x"></i></button>
             </div>
         </div>
