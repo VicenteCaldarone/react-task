@@ -10,7 +10,7 @@ function generateUUID() {
     var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
-        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
 }
@@ -22,7 +22,7 @@ function BarraSuperior() {
     const [tarea, setTarea] = useState("");
     const [prioridad, setPrioridad] = useState("-1");
 
-    const addTarea = (e) =>{
+    const agregarTarea = (e) =>{
         e.preventDefault();
 
         if(validarInputs()){
@@ -39,8 +39,9 @@ function BarraSuperior() {
                 id: generateUUID(),
                 categoria: categoria,
                 nombre: tarea,
-                prioridad: prioridad,
-                descripcion: ''
+                prioridad: prioridad,                
+                descripcion: '',
+                finalizada: false
             });
             //-- actualizo el array con la copia
             setCategoriasTareas(categoriasTareasClone);
@@ -101,7 +102,7 @@ function BarraSuperior() {
                     </select>
                 </div>
                 <div className="col-2">
-                    <button className="btn btn-light" id="btn-addTarea" onClick={addTarea}><i className="fa-sharp fa-solid fa-plus"></i></button>
+                    <button className="btn btn-light" id="btn-addTarea" onClick={agregarTarea}><i className="fa-sharp fa-solid fa-plus"></i></button>
                 </div>
             </div>
         </form>

@@ -11,7 +11,7 @@ export const CategoriasTareasContext = React.createContext({
 
 function App() {
   const [categoriasTareas, setCategoriasTareas] = useState([]);
-
+  // uso esta forma para que BarraSuperior y ContenedorTareas puedan interactuar
   const value = {categoriasTareas, setCategoriasTareas};
 
   return (

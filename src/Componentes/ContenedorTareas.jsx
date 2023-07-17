@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import Categoria from './Categoria'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -8,38 +8,6 @@ const RSwal = withReactContent(Swal);
 
 function ContenedorTareas() {
     const { categoriasTareas, setCategoriasTareas } = useContext(CategoriasTareasContext);
-/* 
-    const [categoriasTareas, setCategoriasTareas] = useState(
-        useContext(CategoriasTareasContext)
-    ); */
-
-    useEffect(() => {
-      let categoriasTareasTest = [];
-  
-      categoriasTareasTest['Categoria01'] = [{
-        id: 1,
-        categoria: 'Categoria01',
-        nombre: 'tarea01',
-        descripcion: 'descripicón Tarea 01',
-        prioridad: 1
-      },{
-        id: 3,
-        categoria: 'Categoria01',
-        nombre: 'tarea03',
-        descripcion: 'descripicón Tarea 03',
-        prioridad: 0
-      }];
-  
-      categoriasTareasTest['Categoria02'] = [{
-        id: 2,
-        categoria: 'Categoria02',
-        nombre: 'tarea02',
-        descripcion: 'descripicón Tarea 02',
-        prioridad: 2
-      }];   // lista de tareas
-      
-      setCategoriasTareas(categoriasTareasTest);  
-    }, []);
 
     const eliminarCategoria = (categoriaNombre) => {
         RSwal.fire({
@@ -51,16 +19,16 @@ function ContenedorTareas() {
             confirmButtonText: 'Eliminar',
             cancelButtonText: 'Cancelar'
           }).then((result) => {
-            //-- 
-            let categoriasTareasAux = [];
-            for(const key in categoriasTareas){
-                if(key !== categoriaNombre){
-                    categoriasTareasAux[key] = categoriasTareas[key];
-                }
-            }
-            setCategoriasTareas(categoriasTareasAux);
-            //--
             if (result.isConfirmed) {
+              //-- 
+              let categoriasTareasAux = [];
+              for(const key in categoriasTareas){
+                  if(key !== categoriaNombre){
+                      categoriasTareasAux[key] = categoriasTareas[key];
+                  }
+              }
+              setCategoriasTareas(categoriasTareasAux);
+              //--
               RSwal.fire(
                 'Eliminado!',
                 'La categoría fué eliminada correctamente.',
@@ -70,18 +38,15 @@ function ContenedorTareas() {
           })
     };
 
-
   return (
     <div className="px-3">
         <div className="row" id="cardContainer">
-
         {Object.entries(categoriasTareas).length > 0 ? 
             Object.entries(categoriasTareas).map(([categoria, tareas])=>{
                 return<Categoria key={categoria} nombre={categoria} listaTareas={tareas} onDelete={eliminarCategoria}></Categoria>
             }):
             (<></>)
         }
-           
         </div>        
     </div>
   )
